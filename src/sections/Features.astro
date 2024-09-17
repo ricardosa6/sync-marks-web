@@ -1,0 +1,72 @@
+---
+import IconAppWindowFilled from "@/icons/IconAppWindowFilled.astro";
+import IconBrandChrome from "@/icons/IconBrandChrome.astro";
+import IconBrandEdge from "@/icons/IconBrandEdge.astro";
+import IconBrandVivaldi from "@/icons/IconBrandVivaldi.astro";
+import IconRefresh from "@/icons/IconRefresh.astro";
+
+const features = [
+  {
+    badge: null,
+    title: "Sincronización",
+    text: 'Sincronizar tus marcadores <strong class="font-bold">automáticamente</strong>, sin importar en qué navegador estés trabajando.',
+    icons: [IconRefresh],
+    classIcon: "text-blue-400 dark:text-yellow-500",
+  },
+  {
+    badge: null,
+    title: "Navegadores compatibles",
+    text: 'Compatible solo con navegadores basados en Chromium: <strong class="font-bold">Chrome</strong>, <strong  class="font-bold">Edge</strong>, <strong class="font-bold">Opera</strong>, y <strong class="font-bold">Brave</strong>. ¡Pronto disponible en más navegadores!',
+    icons: [IconBrandChrome /* IconBrandEdge, IconBrandVivaldi */],
+    classIcon: "text-yellow-400 dark:text-blue-500",
+  },
+  // {
+  //   badge: "Próximamente",
+  //   title: "Sincroniza solo lo necesario",
+  //   text: "Sincroniza selectivamente los marcadores que prefieras en cada navegador. Mantén organizados tus favoritos según tus necesidades.",
+  //   emoji: "✅",
+  // },
+];
+---
+
+<section class="py-0 lg:py-10">
+  <ul class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    {
+      features.map(({ text, icons, title, badge, classIcon }) => (
+        <li class="flex gap-4 flex-col items-start p-6 rounded-lg dark:bg-slate-800/40 bg-gray-100/40">
+          <div class="flex justify-between w-full">
+            <div class="flex items-center justify-center select-none gap-1">
+              {icons.map((Icon) => (
+                <Icon size={32} svgClass={classIcon} />
+              ))}
+            </div>
+            {badge && (
+              <span class="text-md font-semibold text-white dark:bg-blue-800 bg-blue-500 rounded-md px-2 py-1 h-fit">
+                {badge}
+                🛠️
+              </span>
+            )}
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="flex justify-between">
+              <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                {title}
+              </h3>
+            </div>
+            <p class="text-slate-700 dark:text-slate-300 text-left text-pretty text-sx font-light">
+              <Fragment set:html={text} />
+            </p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+
+  <!-- Imagen de la configuración de la extensión -->
+  <!-- <div class="image mt-3">
+    <img
+      src="ruta-a-tu-imagen2.jpg"
+      alt="Configuración de sincronización de marcadores"
+    />
+  </div> -->
+</section>

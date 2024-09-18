@@ -20,24 +20,24 @@ const { title } = Astro.props;
   </head>
   <body>
     <Header />
-    <div class="pt-2">
-      <div id="slot-container"></div>
+    <div id="slot-container"></div>
+    <div class="pt-12">
       <slot />
     </div>
     <Footer />
-    <div
-      class="absolute inset-0 top-0 -z-10 h-full w-full bg-white dark:bg-slate-950"
-    >
-      <div
-        class="absolute bottom-auto left-auto right-0 top-0 h-[900px] w-[700px] -translate-x-[10%] translate-y-[5%] rounded-full bg-[rgba(149,135,221,0.62)] dark:bg-[radial-gradient(circle_500px_at_50%_200px,#3e3e3e,transparent)] opacity-50 blur-[80px]"
-      >
-      </div>
-      <div
-        class="absolute bottom-auto left-auto right-0 top-0 h-[600px] w-[500px] -translate-x-[250%] translate-y-[0%] rounded-full bg-[rgba(149,135,221,0.62)] dark:bg-[radial-gradient(circle_900px_at_60%_200px,#3e3e3e,transparent)] opacity-50 blur-[80px]"
-      >
-      </div>
-    </div>
   </body>
+  <div
+    class="fixed inset-0 top-0 -z-10 h-full w-full bg-white dark:bg-slate-950"
+  >
+    <div
+      class="absolute bottom-auto left-auto right-0 top-0 h-[900px] w-[700px] -translate-x-[10%] translate-y-[5%] rounded-full bg-[rgba(149,135,221,0.62)] dark:bg-[radial-gradient(circle_500px_at_50%_200px,#3e3e3e,transparent)] opacity-50 blur-[80px]"
+    >
+    </div>
+    <div
+      class="absolute bottom-auto left-auto right-0 top-0 h-[600px] w-[500px] -translate-x-[250%] translate-y-[0%] rounded-full bg-[rgba(149,135,221,0.62)] dark:bg-[radial-gradient(circle_900px_at_60%_200px,#3e3e3e,transparent)] opacity-50 blur-[80px]"
+    >
+    </div>
+  </div>
 </html>
 <script>
   // On page load or when changing themes, best to add inline in `head` to avoid FOUC

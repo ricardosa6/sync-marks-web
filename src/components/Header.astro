@@ -5,7 +5,7 @@ import SyncMarksLogo from "./SyncMarksLogo.astro";
 
 <header
   id="header"
-  class="sticky top-0 w-full p-4 backdrop-blur-sm transition-all ease-in-out border-b-[0.5px] border-opacity-0 border-b-slate-700 text-slate-700 dark:text-slate-300 border-solid"
+  class="fixed top-0 w-full p-4 backdrop-blur-sm transition-all ease-in-out border-b-[0.5px] border-opacity-0 border-b-slate-700 text-slate-700 dark:text-slate-300 border-solid"
 >
   <div class="max-w-screen-xl mx-auto flex justify-between gap-2 items-center">
     <a href="./">
@@ -42,8 +42,8 @@ import SyncMarksLogo from "./SyncMarksLogo.astro";
       });
     },
     {
-      rootMargin: `-${headerEl?.offsetHeight}px`,
-      threshold: 0,
+      // rootMargin: `-${headerEl?.offsetHeight}px`,
+      threshold: 0.1,
     }
   );
 

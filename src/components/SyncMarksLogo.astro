@@ -1,6 +1,15 @@
 ---
 import SyncMarksLogoRef from "@/icons/SyncMarks.svg";
 
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 interface Props {
   showName?: boolean;
   imgClass?: astroHTML.JSX.HTMLAttributes["class"];
@@ -18,7 +27,7 @@ const { imgClass, showName = true } = Astro.props;
   {
     showName ? (
       <p class="text-md font-semibold text-slate-700 dark:text-slate-300 text-pretty">
-        Sync Marks
+        {t("syncMarks")}
       </p>
     ) : null
   }

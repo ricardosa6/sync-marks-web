@@ -1,6 +1,12 @@
 ---
 import ToggleThemeButton from "./ToggleThemeButton.astro";
 import SyncMarksLogo from "./SyncMarksLogo.astro";
+
+import { getLangFromUrl, useTranslatedPath } from "@/i18n/utils";
+import LanguageSelector from "./LanguageSelector.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <header
@@ -10,11 +16,12 @@ import SyncMarksLogo from "./SyncMarksLogo.astro";
   <div
     class="max-w-screen-xl mx-auto flex justify-between gap-2 items-center dark:text-slate-300 text-slate-700"
   >
-    <a href={"/"}>
+    <a href={translatePath("/")}>
       <SyncMarksLogo />
     </a>
     <div class="flex items-center gap-2">
       <ToggleThemeButton />
+      <LanguageSelector />
     </div>
   </div>
 </header>
@@ -23,7 +30,7 @@ import SyncMarksLogo from "./SyncMarksLogo.astro";
   #header {
     animation: blur-header linear both;
     animation-timeline: scroll();
-    animation-range: 0 150px;
+    /* animation-range: 0 150px; */
   }
 
   @keyframes blur-header {
@@ -33,42 +40,3 @@ import SyncMarksLogo from "./SyncMarksLogo.astro";
     }
   }
 </style>
-<!-- 
-<script>
-  const headerEl = document.getElementById("header");
-  // show bottom border when scrolling down an reach the content
-  const observer = new IntersectionObserver(
-    (entries) => {
-      console.log("pasa por aqui");
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          // Si el elemento no está en el viewport
-          headerEl?.classList.add(
-            "backdrop-blur-sm",
-            "!border-opacity-100",
-            "bg-white/25",
-            "dark:bg-slate-950/25"
-          );
-          // headerEl?.classList.remove("border-b-0");
-        } else {
-          // Si el elemento está en el viewport
-          headerEl?.classList.remove(
-            "backdrop-blur-sm",
-            "!border-opacity-100",
-            "bg-white/25",
-            "dark:bg-slate-950/25"
-          );
-        }
-      });
-    },
-    {
-      // rootMargin: `2px`,
-      threshold: 0.1,
-    }
-  );
-
-  // const containerEl = document.getElementById("slot-container");
-
-  // console.log("containerEl", containerEl);
-  // observer.observe(containerEl);
-</script> -->

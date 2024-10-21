@@ -5,20 +5,29 @@ import IconBrandEdge from "@/icons/IconBrandEdge.astro";
 import IconBrandVivaldi from "@/icons/IconBrandVivaldi.astro";
 import IconRefresh from "@/icons/IconRefresh.astro";
 
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const features = [
   {
     badge: null,
-    title: "Sincronización",
-    text: 'Sincronizar tus marcadores <strong class="font-bold">automáticamente</strong>, sin importar en qué navegador estés trabajando.',
+    title: t("features.sync.title"),
+    text: t("features.sync.description"),
     icons: [IconRefresh],
-    classIcon: "text-blue-400 dark:text-yellow-500",
+    classIcon: "text-blue-400 dark:text-blue-500",
   },
   {
     badge: null,
-    title: "Navegadores compatibles",
-    text: 'Compatible solo con navegadores basados en Chromium: <strong class="font-bold">Chrome</strong>, <strong  class="font-bold">Edge</strong>, <strong class="font-bold">Opera</strong>, y <strong class="font-bold">Brave</strong>. ¡Pronto disponible en más navegadores!',
+    title: t("features.browserCompatibility.title"),
+    text: t("features.browserCompatibility.description"),
     icons: [IconBrandChrome /* IconBrandEdge, IconBrandVivaldi */],
-    classIcon: "text-yellow-400 dark:text-blue-500",
+    classIcon: "text-yellow-400 dark:text-yellow-500",
   },
   // {
   //   badge: "Próximamente",

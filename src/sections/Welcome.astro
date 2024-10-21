@@ -1,6 +1,9 @@
 ---
 import CTAInstallExtension from "@/components/CTAInstallExtension.astro";
-import SyncMarksLogo from "../components/SyncMarksLogo.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="py-10 flex gap-10 flex-col items-center">
@@ -8,15 +11,18 @@ import SyncMarksLogo from "../components/SyncMarksLogo.astro";
     <h1
       class="text-3xl lg:text-6xl font-extrabold text-slate-700 dark:text-slate-300 text-center mb-2 text-pretty"
     >
-      Bienvenid@ a <br />
-      <span class="text-gradient text-5xl lg:text-8xl w-full">Sync Marks</span>
+      {t("welcome.title")}
+      <br />
+      <span class="text-gradient text-5xl lg:text-8xl w-full"
+        >{t("syncMarks")}</span
+      >
     </h1>
     <!-- <SyncMarksLogo showName={false} imgClass="!h-[128px] !w-[128px]" /> -->
   </div>
   <p
     class="text-lg lg:text-2xl font-medium text-slate-500 dark:text-slate-300 text-center text-balance"
   >
-    Sincroniza tus marcadores en tus diferentes navegadores
+    {t("welcome.subtitle")}
   </p>
   <CTAInstallExtension />
 </section>

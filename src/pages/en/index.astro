@@ -1,0 +1,24 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Features from "@/sections/Features.astro";
+import Installation from "@/sections/Installation.astro";
+import Welcome from "@/sections/Welcome.astro";
+---
+
+<Layout title="Welcome to Sync Marks">
+  <main class="max-w-[75ch] mx-auto px-4 lg:px-2">
+    <Welcome />
+    <Features />
+    <!-- <Installation /> -->
+  </main>
+</Layout>
+
+<style is:global>
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+</style>

@@ -3,7 +3,6 @@ import ToggleThemeButton from "./ToggleThemeButton.astro";
 import SyncMarksLogo from "./SyncMarksLogo.astro";
 
 import { getLangFromUrl, useTranslatedPath } from "@/i18n/utils";
-import LanguageSelector from "./LanguageSelector.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
@@ -21,7 +20,6 @@ const translatePath = useTranslatedPath(lang);
     </a>
     <div class="flex items-center gap-2">
       <ToggleThemeButton />
-      <LanguageSelector />
     </div>
   </div>
 </header>

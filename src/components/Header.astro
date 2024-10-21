@@ -1,25 +1,52 @@
 ---
 import ToggleThemeButton from "./ToggleThemeButton.astro";
 import SyncMarksLogo from "./SyncMarksLogo.astro";
+
+import { getLangFromUrl, useTranslatedPath } from "@/i18n/utils";
+import LanguageSelector from "./LanguageSelector.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <header
   id="header"
-  class="fixed top-0 w-full p-4 backdrop-blur-sm transition-all ease-in-out border-b-[0.5px] border-opacity-0 border-b-slate-700 text-slate-700 dark:text-slate-300 border-solid"
+  class="fixed top-0 w-full p-4 !border-b-slate-700 dark:!border-b-slate-700"
 >
-  <div class="max-w-screen-xl mx-auto flex justify-between gap-2 items-center">
-    <a href="./">
+  <div
+    class="max-w-screen-xl mx-auto flex justify-between gap-2 items-center dark:text-slate-300 text-slate-700"
+  >
+    <a href={translatePath("/")}>
       <SyncMarksLogo />
     </a>
-    <ToggleThemeButton />
+    <div class="flex items-center gap-2">
+      <ToggleThemeButton />
+      <LanguageSelector />
+    </div>
   </div>
 </header>
 
+<style>
+  #header {
+    animation: blur-header linear both;
+    animation-timeline: scroll();
+    animation-range: 0 150px;
+  }
+
+  @keyframes blur-header {
+    100% {
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid;
+    }
+  }
+</style>
+<!-- 
 <script>
   const headerEl = document.getElementById("header");
   // show bottom border when scrolling down an reach the content
   const observer = new IntersectionObserver(
     (entries) => {
+      console.log("pasa por aqui");
       entries.forEach((entry) => {
         if (!entry.isIntersecting) {
           // Si el elemento no está en el viewport
@@ -42,11 +69,13 @@ import SyncMarksLogo from "./SyncMarksLogo.astro";
       });
     },
     {
-      // rootMargin: `-${headerEl?.offsetHeight}px`,
+      // rootMargin: `2px`,
       threshold: 0.1,
     }
   );
 
-  const containerEl = document.getElementById("slot-container");
-  observer.observe(containerEl as HTMLElement);
-</script>
+  // const containerEl = document.getElementById("slot-container");
+
+  // console.log("containerEl", containerEl);
+  // observer.observe(containerEl);
+</script> -->

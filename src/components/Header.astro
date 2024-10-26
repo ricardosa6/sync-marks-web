@@ -26,44 +26,6 @@ const translatePath = useTranslatedPath(lang);
   </div>
 </header>
 
-<script is:inline>
-  const headerEl = document.getElementById("header");
-  // show bottom border when scrolling down an reach the content
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          // Si el elemento no está en el viewport
-          headerEl?.classList.add(
-            "backdrop-blur-sm",
-            "border-b-[0.5px]",
-            "!border-opacity-100",
-            "bg-white/25",
-            "dark:bg-slate-950/25"
-          );
-          // headerEl?.classList.remove("border-b-0");
-        } else {
-          // Si el elemento está en el viewport
-          headerEl?.classList.remove(
-            "border-b-[0.5px]",
-            "backdrop-blur-sm",
-            "!border-opacity-100",
-            "bg-white/25",
-            "dark:bg-slate-950/25"
-          );
-        }
-      });
-    },
-    {
-      // rootMargin: `-${headerEl?.offsetHeight}px`,
-      threshold: 0.1,
-    }
-  );
-
-  const containerEl = document.getElementById("slot-container");
-  observer.observe(containerEl);
-</script>
-
 <!-- <style>
   #header {
     animation: blur-header linear both;

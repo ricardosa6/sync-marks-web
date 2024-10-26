@@ -28,9 +28,17 @@ const translatePath = useTranslatedPath(lang);
 
 <style>
   #header {
-    animation: blur-header linear both;
+    -webkit-animation: blur-header linear both;
+    -animation: blur-header linear both;
     animation-timeline: scroll();
     /* animation-range: 0 150px; */
+  }
+
+  @-webkit-keyframes blur-header {
+    100% {
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid;
+    }
   }
 
   @keyframes blur-header {

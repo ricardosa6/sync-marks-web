@@ -11,7 +11,7 @@ const translatePath = useTranslatedPath(lang);
 
 <header
   id="header"
-  class="fixed top-0 w-full p-4 !border-b-slate-700 dark:!border-b-slate-700"
+  class="fixed top-0 w-full p-4 !border-b-slate-500 dark:!border-b-slate-700"
 >
   <div
     class="max-w-screen-xl mx-auto flex justify-between gap-2 items-center dark:text-slate-300 text-slate-700"
@@ -26,19 +26,49 @@ const translatePath = useTranslatedPath(lang);
   </div>
 </header>
 
-<style>
-  #header {
-    -webkit-animation: blur-header linear both;
-    -animation: blur-header linear both;
-    animation-timeline: scroll();
-    /* animation-range: 0 150px; */
-  }
-
-  @-webkit-keyframes blur-header {
-    100% {
-      backdrop-filter: blur(8px);
-      border-bottom: 0.5px solid;
+<script is:inline>
+  const headerEl = document.getElementById("header");
+  // show bottom border when scrolling down an reach the content
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          // Si el elemento no está en el viewport
+          headerEl?.classList.add(
+            "backdrop-blur-sm",
+            "border-b-[0.5px]",
+            "!border-opacity-100",
+            "bg-white/25",
+            "dark:bg-slate-950/25"
+          );
+          // headerEl?.classList.remove("border-b-0");
+        } else {
+          // Si el elemento está en el viewport
+          headerEl?.classList.remove(
+            "border-b-[0.5px]",
+            "backdrop-blur-sm",
+            "!border-opacity-100",
+            "bg-white/25",
+            "dark:bg-slate-950/25"
+          );
+        }
+      });
+    },
+    {
+      // rootMargin: `-${headerEl?.offsetHeight}px`,
+      threshold: 0.1,
     }
+  );
+
+  const containerEl = document.getElementById("slot-container");
+  observer.observe(containerEl);
+</script>
+
+<!-- <style>
+  #header {
+    animation: blur-header linear both;
+    animation-timeline: scroll();
+    animation-range: 0 150px;
   }
 
   @keyframes blur-header {
@@ -47,4 +77,4 @@ const translatePath = useTranslatedPath(lang);
       border-bottom: 0.5px solid;
     }
   }
-</style>
+</style> -->

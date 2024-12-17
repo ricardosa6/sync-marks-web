@@ -16,9 +16,8 @@ export function useTranslatedPath(lang: keyof typeof ui) {
   return function translatePath(path: string, l: keyof typeof ui = lang) {
     const pathName = path.replaceAll("/", "");
     const hasTranslation =
-      defaultLang !== l &&
-      routes[l] !== undefined &&
-      routes[l][pathName] !== undefined;
+      routes[l] !== undefined && routes[l][pathName] !== undefined;
+
     const translatedPath = hasTranslation ? "/" + routes[l][pathName] : path;
 
     return !showDefaultLang && l === defaultLang

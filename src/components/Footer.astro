@@ -1,11 +1,15 @@
 ---
-import { getRelativeLocaleUrl } from "astro:i18n";
-
-import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "@/i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 
-const translatedPathUrl = getRelativeLocaleUrl(lang, "privacy-policy");
+const translatePath = useTranslatedPath(lang);
+
+const translatedPathUrl = translatePath("privacy-policy", lang);
 
 const t = useTranslations(lang);
 ---

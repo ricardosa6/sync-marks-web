@@ -74,42 +74,51 @@ const lang = getLangFromUrl(Astro.url);
   });
 </script>
 
-<script is:inline data-astro-rerun>
-  const headerEl = document.getElementById("header");
-  // show bottom border when scrolling down an reach the content
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          // Si el elemento no está en el viewport
-          headerEl?.classList.add(
-            "backdrop-blur-sm",
-            "border-b-[0.5px]",
-            "!border-opacity-100",
-            "bg-white/25",
-            "dark:bg-slate-950/25"
-          );
-          // headerEl?.classList.remove("border-b-0");
-        } else {
-          // Si el elemento está en el viewport
-          headerEl?.classList.remove(
-            "border-b-[0.5px]",
-            "backdrop-blur-sm",
-            "!border-opacity-100",
-            "bg-white/25",
-            "dark:bg-slate-950/25"
-          );
-        }
-      });
-    },
-    {
-      // rootMargin: `-${headerEl?.offsetHeight}px`,
-      threshold: 0.1,
-    }
-  );
+<script is:inline>
+  const setIntersectionObserver = () => {
+    const headerEl = document.getElementById("header");
+    // show bottom border when scrolling down an reach the content
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            // Si el elemento no está en el viewport
+            headerEl?.classList.add(
+              "backdrop-blur-sm",
+              "border-b-[0.5px]",
+              "!border-opacity-100",
+              "bg-white/25",
+              "dark:bg-slate-950/25"
+            );
+            // headerEl?.classList.remove("border-b-0");
+          } else {
+            // Si el elemento está en el viewport
+            headerEl?.classList.remove(
+              "border-b-[0.5px]",
+              "backdrop-blur-sm",
+              "!border-opacity-100",
+              "bg-white/25",
+              "dark:bg-slate-950/25"
+            );
+          }
+        });
+      },
+      {
+        // rootMargin: `-${headerEl?.offsetHeight}px`,
+        threshold: 0.1,
+      }
+    );
 
-  const containerEl = document.getElementById("slot-container");
-  observer.observe(containerEl);
+    const containerEl = document.getElementById("slot-container");
+
+    observer.observe(containerEl);
+  };
+
+  setIntersectionObserver();
+
+  document.addEventListener("astro:page-load", () => {
+    setIntersectionObserver();
+  });
 </script>
 
 <style is:global>

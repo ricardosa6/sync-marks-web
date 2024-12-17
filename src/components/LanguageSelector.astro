@@ -20,8 +20,8 @@ const lang = getLangFromUrl(Astro.url);
 </label>
 
 <script>
-  import { getRouteFromUrl } from "@/i18n/utils";
-  import { getRelativeLocaleUrl } from "astro:i18n";
+  import { getRouteFromUrl, useTranslatedPath } from "@/i18n/utils";
+  import { getAbsoluteLocaleUrl } from "astro:i18n";
   import { navigate } from "astro:transitions/client";
 
   document.addEventListener("astro:page-load", () => {
@@ -37,9 +37,15 @@ const lang = getLangFromUrl(Astro.url);
 
       const route = getRouteFromUrl(url);
 
-      const relativeLocaleUrl = getRelativeLocaleUrl(lang, route);
+      if (!route) {
+        navigate(getAbsoluteLocaleUrl(lang), { history: "replace" });
+        return;
+      }
 
-      navigate(relativeLocaleUrl, { history: "replace" });
+      const translatePath = useTranslatedPath(lang);
+      const translatedPath = translatePath(route, lang);
+
+      navigate(translatedPath, { history: "replace" });
     });
   });
 </script>

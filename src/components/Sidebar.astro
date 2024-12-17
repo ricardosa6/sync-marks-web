@@ -1,0 +1,46 @@
+---
+import IconMenu from "@/icons/IconMenu.astro";
+import ToggleThemeButton from "./ToggleThemeButton.astro";
+import LanguageSelector from "./LanguageSelector.astro";
+import IconX from "@/icons/IconX.astro";
+---
+
+<!-- drawer component -->
+<aside
+  id="menu-drawer"
+  class="mt-16 hidden fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full w-screen bg-white dark:bg-slate-900 border-t-[0.5px] !border-t-slate-500 dark:!border-t-slate-700"
+  tabindex="-1"
+  aria-labelledby="drawer-right-label"
+>
+  <div class="float-right">
+    <LanguageSelector />
+    <ToggleThemeButton />
+  </div>
+</aside>
+
+<button
+  class="text-gray-500 dark:text-gray-400 hover:bg-inherit md:hover:bg-gray-100 md:dark:hover:bg-gray-700 focus:outline-none focus:ring-transparent rounded-lg text-sm p-1.5"
+  type="button"
+  id="menu-button"
+>
+  <IconMenu size={20} />
+  <IconX size={20} svgClass={"hidden"} />
+</button>
+
+<script is:inline data-astro-rerun>
+  const drawerMenu = document.getElementById("menu-drawer");
+  const drawerButton = document.getElementById("menu-button");
+  const body = document.body;
+  const iconMenu = drawerButton?.querySelector("#icon-menu");
+  const iconX = drawerButton?.querySelector("#icon-x");
+
+  drawerButton?.addEventListener("click", () => {
+    body.classList.toggle("overflow-hidden");
+
+    drawerMenu?.classList.toggle("hidden");
+    drawerMenu?.classList.toggle("translate-x-full");
+
+    iconMenu?.classList.toggle("hidden");
+    iconX?.classList.toggle("hidden");
+  });
+</script>

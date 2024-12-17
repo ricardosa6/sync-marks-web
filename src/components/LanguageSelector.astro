@@ -6,12 +6,12 @@ const lang = getLangFromUrl(Astro.url);
 ---
 
 <label
-  class="flex items-center gap-1 pl-2 text-gray-900 !bg-transparent !border-0 border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+  class="flex items-center gap-1 pl-0 text-gray-900 !bg-transparent !border-0 border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 >
   <IconLanguage size={20} svgClass="text-slate-700 dark:text-slate-300 " />
   <select
     id="lang-select"
-    class="flex w-full !pr-6 !pl-1 text-sm bg-transparent border-0 focus:ring-0"
+    class="flex w-fit !pr-8 !pl-1 !py-1 text-sm bg-transparent border-0 focus:ring-0"
   >
     <span class="sr-only">Select language</span>
     <option id="lang-es" selected={lang === "es"} value="es">Español</option>
@@ -20,6 +20,8 @@ const lang = getLangFromUrl(Astro.url);
 </label>
 
 <script>
+  import { getRouteFromUrl } from "@/i18n/utils";
+  import { getRelativeLocaleUrl } from "astro:i18n";
   import { navigate } from "astro:transitions/client";
 
   document.addEventListener("astro:page-load", () => {
@@ -29,10 +31,15 @@ const lang = getLangFromUrl(Astro.url);
     ) as HTMLSelectElement;
     langSelect.addEventListener("change", (e) => {
       const target = e.target as HTMLSelectElement;
-      const lang = target.value;
+      const lang = target.value as "en" | "es";
+
       const url = new URL(window.location.href);
-      const newHRef = `/${lang}${url.pathname.replace(/\/(es|en)\//, "/")}`;
-      navigate(newHRef);
+
+      const route = getRouteFromUrl(url);
+
+      const relativeLocaleUrl = getRelativeLocaleUrl(lang, route);
+
+      navigate(relativeLocaleUrl, { history: "replace" });
     });
   });
 </script>

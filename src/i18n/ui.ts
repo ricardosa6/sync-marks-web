@@ -10,9 +10,11 @@ export const showDefaultLang = true;
 export const routes: { [key in keyof typeof ui]: Record<string, string> } = {
   en: {
     "politica-de-privacidad": "privacy-policy",
+    "privacy-policy": "privacy-policy",
   },
   es: {
     "politica-de-privacidad": "politica-de-privacidad",
+    "privacy-policy": "politica-de-privacidad",
   },
 } as const;
 

@@ -39,10 +39,10 @@ const features = [
 ---
 
 <section class="py-0 lg:py-10">
-  <ul class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
     {
       features.map(({ text, icons, title, badge, classIcon }) => (
-        <li class="flex gap-4 flex-col items-start p-6 rounded-lg dark:bg-slate-800/40 bg-gray-100/40">
+        <li class="flex gap-4 flex-col items-start p-6 rounded-lg dark:bg-slate-800/40 bg-gray-100/40 hover:shadow-lg hover:contrast-125 hover:bg-opacity-80 dark:hover:shadow-slate-600/15 hover:shadow-slate-800/10">
           <div class="flex justify-between w-full">
             <div class="flex items-center justify-center select-none gap-1">
               {icons.map((Icon) => (

@@ -1,14 +1,13 @@
 ---
-import { EXTENSION_GITHUB_REPO_URL } from "../utils/constants";
-import {
-  getLangFromUrl,
-  useTranslatedPath,
-  useTranslations,
-} from "@/i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
+
+const translatedPathUrl = getRelativeLocaleUrl(lang, "privacy-policy");
+
 const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
 ---
 
 <footer class="p-4">
@@ -30,9 +29,8 @@ const translatePath = useTranslatedPath(lang);
         >
       </li> -->
       <li>
-        <a
-          href={translatePath("/politica-de-privacidad")}
-          class="hover:underline me-4 md:me-6">{t("nav.privacyPolicy")}</a
+        <a href={translatedPathUrl} class="hover:underline me-4 md:me-6"
+          >{t("nav.privacyPolicy")}</a
         >
       </li>
       <!-- <li>

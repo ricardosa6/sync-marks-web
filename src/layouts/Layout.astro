@@ -1,7 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import { getLangFromUrl } from "@/i18n/utils";
 
 interface Props {
@@ -22,17 +22,18 @@ const lang = getLangFromUrl(Astro.url);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body>
     <Header />
+    <!-- <Sidebar /> -->
     <div id="slot-container"></div>
-    <div class="pt-12">
+    <div class="pt-[68px] h-full">
       <slot />
     </div>
     <Footer />
   </body><div
-    class="fixed inset-0 top-0 -z-10 h-full w-full bg-white dark:bg-slate-950"
+    class="fixed inset-0 top-0 -z-10 min-h-full w-full bg-white dark:bg-slate-950"
   >
     <div
       class="absolute bottom-auto left-auto right-0 top-0 h-[900px] w-[700px] -translate-x-[10%] translate-y-[5%] rounded-full bg-[rgba(149,135,221,0.62)] dark:bg-[radial-gradient(circle_500px_at_50%_200px,#3e3e3e,transparent)] opacity-50 blur-[80px]"
@@ -44,7 +45,20 @@ const lang = getLangFromUrl(Astro.url);
     </div>
   </div>
 </html>
+
 <script>
+  import "flowbite";
+</script>
+<script is:inline>
+  if (
+    localStorage.getItem("color-theme") === "dark" ||
+    (!("color-theme" in localStorage) &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches)
+  ) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
   document.addEventListener("astro:page-load", () => {
     // This runs on first page load and after every navigation.
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
@@ -60,7 +74,7 @@ const lang = getLangFromUrl(Astro.url);
   });
 </script>
 
-<script is:inline>
+<script is:inline data-astro-rerun>
   const headerEl = document.getElementById("header");
   // show bottom border when scrolling down an reach the content
   const observer = new IntersectionObserver(

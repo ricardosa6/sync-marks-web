@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="h-full">
+  <!-- Fondo -->
+  
+  <!-- Primer círculo -->
+  <circle 
+    cx="130" 
+    cy="-105" 
+    r="450" 
+    fill="rgba(149, 135, 221, 0.72)" 
+    class="dark:fill-[radial-gradient(circle_500px_at_50%_200px,#3e3e3e,transparent)]"
+    opacity="0.5"
+    filter="url(#blur)"
+  />
+
+  <!-- Segundo círculo -->
+  <circle 
+    cx="550" 
+    cy="700" 
+    r="300" 
+    fill="rgba(149, 135, 221, 0.62)" 
+    class="dark:fill-[radial-gradient(circle_900px_at_60%_200px,#3e3e3e,transparent)]"
+    opacity="0.5"
+    filter="url(#blur)"
+  />
+
+  <!-- Filtro de desenfoque -->
+  <defs>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="80" />
+    </filter>
+  </defs>
+</svg>

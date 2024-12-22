@@ -24,7 +24,9 @@ const lang = getLangFromUrl(Astro.url);
     <title>{title}</title>
     <ClientRouter />
   </head>
-  <body>
+  <body
+    class="bg-[url(/background.svg)] bg-cover dark:bg-slate-950 bg-screen bg-repeat"
+  >
     <Header />
     <!-- <Sidebar /> -->
     <div id="slot-container"></div>
@@ -32,18 +34,6 @@ const lang = getLangFromUrl(Astro.url);
       <slot />
     </div>
     <Footer />
-    <div
-      class="fixed inset-0 top-0 -z-10 h-full w-full bg-white dark:bg-slate-950 bg-cover"
-    >
-      <div
-        class="absolute bottom-auto left-auto right-0 top-0 h-[900px] w-[700px] -translate-x-[10%] translate-y-[5%] rounded-full bg-[rgba(149,135,221,0.62)] dark:bg-[radial-gradient(circle_500px_at_50%_200px,#3e3e3e,transparent)] opacity-50 blur-[80px]"
-      >
-      </div>
-      <div
-        class="absolute bottom-auto left-auto right-0 top-0 h-[600px] w-[500px] -translate-x-[250%] translate-y-[0%] rounded-full bg-[rgba(149,135,221,0.62)] dark:bg-[radial-gradient(circle_900px_at_60%_200px,#3e3e3e,transparent)] opacity-50 blur-[80px]"
-      >
-      </div>
-    </div>
   </body>
 </html>
 
@@ -136,7 +126,7 @@ const lang = getLangFromUrl(Astro.url);
 
   body {
     margin: 0;
-    /* min-height: 100vh;  polemico, en movil puede cambiar y haria unlayout shift raro, lo probé en Rive */
+    min-height: 100lvh; /* polemico, en movil puede cambiar y haria unlayout shift raro, lo probé en Rive */
   }
 
   h1,
